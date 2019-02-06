@@ -1,11 +1,15 @@
 package com.padm.ipg.contaskid;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
-        //** Condição para números **//
+        //** Condição para implemenação de números aleatórios na atividade principal**//
 
         int id;
         if (num_aleatorio == 0 || num_aleatorio == 10){
@@ -56,5 +60,43 @@ public class MainActivity extends AppCompatActivity {
             id = getResources().getIdentifier("ini5", "drawable", getPackageName());
             iv_personagem.setImageResource(id);
         }
+
+        //** Implementa sons na atividade inicial **//
+
+        mp = MediaPlayer.create(this, R.raw.alphabet_song);
+        mp.start();
+        mp.setLooping(true);
     }
+
+    public void Jogar (View view){
+        String nome = et_nome.getText().toString();
+
+        //** Libera recursos **//
+        if (!nome.equals("")){
+            mp.stop();
+            mp.release();
+
+         //** Implementa uma nova atividade **//
+             Intent intent = new Intent(this, Main2Activity_Nivel1.class);
+
+             intent.putExtra("jogador", nome);
+             startActivity(intent);;
+             finish();
+        } else {
+            Toast.makeText(this, "Primeiro introduz o teu nome", Toast.LENGTH_SHORT).show();
+
+            et_nome.requestFocus();
+            InputMethodManager imm = (InputMethodManager)getSystemService(this.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(et_nome, InputMethodManager.SHOW_IMPLICIT);
+        }
+
+
+    }
+
+    @Override
+    //** evitua utiliação de função regresso*//
+    public void onBackPressed(){
+
+    }
+
 }
