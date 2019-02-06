@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">ContasKid</string>
     <string name="et_nome">Introduz o teu nome</string>
-    <string name="boton">Jogar</string>
+    <string name="bt_jogar">Jogar</string>
 </resources>
