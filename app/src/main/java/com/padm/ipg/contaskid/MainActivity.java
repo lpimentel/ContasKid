@@ -1,6 +1,8 @@
 package com.padm.ipg.contaskid;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +61,25 @@ public class MainActivity extends AppCompatActivity {
         }   else if (num_aleatorio == 4 || num_aleatorio == 5 || num_aleatorio == 6){
             id = getResources().getIdentifier("ini5", "drawable", getPackageName());
             iv_personagem.setImageResource(id);
+        }
+
+        /**Ligação base de dados**/
+
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "BD", null, 1);
+        SQLiteDatabase BD = admin.getWritableDatabase();
+
+        //**Consulta base de dados e maior valor de score**/
+
+        Cursor consulta = BD.rawQuery(
+        "select * from pontos where score = (select max (score)from pontos)", null);
+        if (consulta.moveToFirst()){
+
+            String temp_nome = consulta.getString(0 );
+            String temp_score = consulta.getString(1 );
+            tv_bestscore.setText("Record" + temp_score + "de" + temp_nome);
+            BD.close();
+        } else {
+            BD.close();
         }
 
         //** Implementa sons na atividade inicial **//
