@@ -2,4 +2,9 @@
     <string name="app_name">ContasKid</string>
     <string name="et_nome">Introduz o teu nome</string>
     <string name="bt_jogar">Jogar</string>
+    <string name="et_vidas">Vidas:</string>
+    <string name="jogador_nome">Jogador:</string>
+    <string name="total_score">Score: 0</string>
+    <string name="bt_somar">Verificar</string>
+    <string name="et_resposta">Resposta</string>
 </resources>
