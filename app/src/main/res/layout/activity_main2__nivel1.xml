@@ -109,6 +109,7 @@
         android:id="@+id/editText_resultado"
         android:layout_width="100dp"
         android:layout_height="40dp"
+        android:importantForAutofill="no"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -123,7 +124,7 @@
         android:layout_marginBottom="217dp"
         android:ems="10"
         android:hint="@string/et_resposta"
-        android:inputType="number" />
+        android:inputType="number" tools:targetApi="o"/>
 
     <Button
         android:id="@+id/button"
