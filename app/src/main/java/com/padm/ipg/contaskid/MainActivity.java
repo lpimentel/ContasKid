@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             mp.release();
 
          //** Implementa uma nova atividade **//
-             Intent intent = new Intent(this, Main2Activity_Nivel1.class);
+             Intent intent = new Intent(this, Nivel1Activity.class);
 
              intent.putExtra("jogador", nome);
              startActivity(intent);;

@@ -5,7 +5,7 @@
     android:id="@+id/bt_valida"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main2Activity_Nivel1">
+    tools:context=".Nivel1Activity">
 
     <TextView
         android:id="@+id/textView_nome"
