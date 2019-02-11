@@ -33,10 +33,10 @@ public class Nivel1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2__nivel1);
+        setContentView(R.layout.activity_nivel1);
 
 
-        Toast.makeText(this, "Nivel 1", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Nivel 1 - Somas simples", Toast.LENGTH_SHORT).show();
 
         //** Cricão das relações entre a parte lógica e gráfica **//
 
