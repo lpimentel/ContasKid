@@ -1,6 +1,9 @@
 package com.padm.ipg.contaskid;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -82,11 +85,14 @@ public class Nivel1Activity extends AppCompatActivity {
                 score ++;
                 tv_score.setText("Score:" + score);
                 et_resposta.setText("");
+                BaseDeDados();
+
 
             } else {
 
                 mp_bad.start();
                 vidas--;
+                BaseDeDados();
 
                 switch (vidas){
                     case 3:
@@ -175,5 +181,48 @@ public class Nivel1Activity extends AppCompatActivity {
         }
 
     }
+//** Implementa o score do jogador com maior pontuação**//
+    public void BaseDeDados (){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"BD", null, 1);
+        SQLiteDatabase BD = admin.getWritableDatabase();
+
+        Cursor consulta = BD.rawQuery("select * from pontos where score = (select max (score) from pontos)", null);
+        if(consulta.moveToFirst()){
+            String temp_nome = consulta.getString(0 );
+            String temp_score = consulta.getString(1);
+
+            int bestScore = Integer.parseInt((temp_score));
+
+            if (score > bestScore){
+                ContentValues modificacao = new ContentValues();
+                modificacao.put ("score", score);
+
+
+                BD.update("pontos", modificacao, "score=" + bestScore, null);
+            }
+
+            BD.close();
+
+        } else {
+            ContentValues insertar = new ContentValues();
+
+            insertar.put("nome", nome_jogador);
+            insertar.put("score", score);
+
+            BD.insert("pontos", null, insertar);
+            BD.close();
+
+        }
+
+
+        }
+
+        @Override
+        public void onBackPressed(){
+
+
+
+    }
+
 
 }
