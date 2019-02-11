@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,6 +64,63 @@ public class Nivel1Activity extends AppCompatActivity {
         //**Indica utilização do método aleatóruio do número**//
         NumAleatorio();
 
+    }
+
+    // **Configuração de validação de resposta**//
+
+    public void Comparar(View view){
+        String resposta = et_resposta.getText().toString();
+
+        // **Configura falta de resposta por parte do utilizado; som para acerto ou falha; número de vidasr**//
+
+        if (!resposta.equals("")){
+
+            int resposta_jogador = Integer.parseInt(resposta);
+            if (resultado == resposta_jogador){
+
+                mp_great.start();
+                score ++;
+                tv_score.setText("Score:" + score);
+                et_resposta.setText("");
+
+            } else {
+
+                mp_bad.start();
+                vidas--;
+
+                switch (vidas){
+                    case 3:
+                        iv_vidas.setImageResource(R.drawable.tresvidas);
+                        break;
+                    case 2:
+                        Toast.makeText(this, "Tens duas vidas", Toast.LENGTH_LONG).show();
+                        iv_vidas.setImageResource(R.drawable.duasvidas);
+                        break;
+                    case 1:
+                        Toast.makeText(this, "Tens uma vida", Toast.LENGTH_LONG).show();
+                        iv_vidas.setImageResource(R.drawable.umavida);
+                        break;
+                    case 0:
+                        Toast.makeText(this, "Perdeste todas as vidas", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        mp.stop();
+                        mp.release();
+                        break;
+                }
+
+                et_resposta.setText("");
+
+            }
+
+            NumAleatorio();
+
+
+        }   else{
+                Toast.makeText(this, "Indica a tua resposta", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     // **Método para criação de somas aleatórias cuja soma não seja maior que dez**//

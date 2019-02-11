@@ -131,11 +131,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/imageView_NumDois"
+        android:layout_alignRight="@+id/imageView_NumDois"
         android:layout_alignBottom="@+id/editText_resultado"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="-4dp"
+        android:onClick="Comparar"
         android:text="@string/bt_somar"
-        android:layout_alignRight="@+id/imageView_NumDois"
         tools:ignore="RtlCompat" />
 
 </RelativeLayout>
