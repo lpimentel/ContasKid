@@ -15,12 +15,15 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     //** Declaração dos objetos para cada campo **//
 
     private EditText et_nome;
     private ImageView iv_personagem;
     private TextView tv_bestscore;
     private MediaPlayer mp;
+
 
     //** Declaração de variavel tipo inteiro com casting **//
 

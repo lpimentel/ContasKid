@@ -11,24 +11,31 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Nivel1Activity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".Nivel2Activity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".Nivel3Activity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".Nivel4Activity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".Nivel5Activity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".Nivel6Activity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
