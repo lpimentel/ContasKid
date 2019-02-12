@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             String temp_nome = consulta.getString(0 );
             String temp_score = consulta.getString(1 );
-            tv_bestscore.setText("Record" + temp_score + "de" + temp_nome);
+            tv_bestscore.setText(getString(R.string.tv_bestRecord) + temp_score + getString(R.string.tv_bestRecord_from) + temp_nome);
             BD.close();
         } else {
             BD.close();
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
              startActivity(intent);;
              finish();
         } else {
-            Toast.makeText(this, "Primeiro introduz o teu nome", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_introduzNome), Toast.LENGTH_SHORT).show();
 
             et_nome.requestFocus();
             InputMethodManager imm = (InputMethodManager)getSystemService(this.INPUT_METHOD_SERVICE);

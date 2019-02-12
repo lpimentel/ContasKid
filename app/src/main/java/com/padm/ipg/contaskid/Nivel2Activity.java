@@ -38,7 +38,7 @@ public class Nivel2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_nivel1);
 
 
-        Toast.makeText(this, "Nivel 2 - Somas moderadas", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.Toast_NivelDois), Toast.LENGTH_SHORT).show();
 
         //** Cricão das relações entre a parte lógica e gráfica **//
 
@@ -120,15 +120,15 @@ public class Nivel2Activity extends AppCompatActivity {
                         iv_vidas.setImageResource(R.drawable.tresvidas);
                         break;
                     case 2:
-                        Toast.makeText(this, "Tens duas vidas", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.Toast_DuasVidas), Toast.LENGTH_LONG).show();
                         iv_vidas.setImageResource(R.drawable.duasvidas);
                         break;
                     case 1:
-                        Toast.makeText(this, "Tens uma vida", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.Toast_UmaVida), Toast.LENGTH_LONG).show();
                         iv_vidas.setImageResource(R.drawable.umavida);
                         break;
                     case 0:
-                        Toast.makeText(this, "Perdeste todas as vidas", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.Toast_SemVidas), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -145,7 +145,7 @@ public class Nivel2Activity extends AppCompatActivity {
 
 
         }   else{
-            Toast.makeText(this, "Indica a tua resposta", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.else_IndicaResposta), Toast.LENGTH_SHORT).show();
 
         }
     }
