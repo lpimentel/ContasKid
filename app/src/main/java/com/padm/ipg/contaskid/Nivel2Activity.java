@@ -73,7 +73,7 @@ public class Nivel2Activity extends AppCompatActivity {
 
 
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         //** Colocalão dos sons **//
@@ -97,14 +97,14 @@ public class Nivel2Activity extends AppCompatActivity {
 
         // **Configura falta de resposta por parte do utilizado; som para acerto ou falha; número de vidasr**//
 
-        if (!resposta.equals("")){
+        if(!resposta.equals("")){
 
             int resposta_jogador = Integer.parseInt(resposta);
             if (resultado == resposta_jogador){
 
                 mp_great.start();
-                score ++;
-                tv_score.setText("Score:" + score);
+                score++;
+                tv_score.setText("Score: " + score);
                 et_resposta.setText("");
                 BaseDeDados();
 
@@ -144,7 +144,7 @@ public class Nivel2Activity extends AppCompatActivity {
             NumAleatorio();
 
 
-        }   else{
+        } else {
             Toast.makeText(this, getString(R.string.else_IndicaResposta), Toast.LENGTH_SHORT).show();
 
         }
@@ -160,18 +160,18 @@ public class Nivel2Activity extends AppCompatActivity {
             numAleatorio_dois = (int) (Math.random() * 10);
 
             resultado = numAleatorio_um + numAleatorio_dois;
-            
 
-                for (int i = 0; i  < numero.length; i++) {
-                    int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
-                    if (numAleatorio_um == i) {
-                        iv_Aum.setImageResource(id);
 
-                    }if (numAleatorio_dois == i){
-                        iv_Adois.setImageResource(id);
-                    }
+            for (int i = 0; i  < numero.length; i++){
+                int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
+                if (numAleatorio_um == i){
+                    iv_Aum.setImageResource(id);
 
+                }if (numAleatorio_dois == i){
+                    iv_Adois.setImageResource(id);
                 }
+
+            }
 
 
 
@@ -199,20 +199,21 @@ public class Nivel2Activity extends AppCompatActivity {
 
     }
     //** Implementa o score do jogador com maior pontuação**//
-    public void BaseDeDados (){
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"BD", null, 1);
+    public void BaseDeDados(){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "BD", null, 1);
         SQLiteDatabase BD = admin.getWritableDatabase();
 
         Cursor consulta = BD.rawQuery("select * from pontos where score = (select max (score) from pontos)", null);
         if(consulta.moveToFirst()){
-            String temp_nome = consulta.getString(0 );
+            String temp_nome = consulta.getString(0);
             String temp_score = consulta.getString(1);
 
-            int bestScore = Integer.parseInt((temp_score));
+            int bestScore = Integer.parseInt(temp_score);
 
             if (score > bestScore){
                 ContentValues modificacao = new ContentValues();
-                modificacao.put ("score", score);
+                modificacao.put("nome", nome_jogador);
+                modificacao.put("score", score);
 
 
                 BD.update("pontos", modificacao, "score=" + bestScore, null);

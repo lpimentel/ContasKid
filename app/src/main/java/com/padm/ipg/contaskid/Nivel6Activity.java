@@ -72,7 +72,7 @@ public class Nivel6Activity extends AppCompatActivity {
 
 
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         //** Colocalão dos sons **//
@@ -220,6 +220,7 @@ public class Nivel6Activity extends AppCompatActivity {
 
             if (score > bestScore){
                 ContentValues modificacao = new ContentValues();
+                modificacao.put ("nome", nome_jogador);
                 modificacao.put ("score", score);
 
 

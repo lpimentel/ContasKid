@@ -8,8 +8,6 @@
     <string name="bt_somar">Verificar</string>
     <string name="et_resposta">Resposta</string>
     <string name="toast_introduzNome">Primeiro introduz o teu nome</string>
-    <string name="tv_bestRecord">Record</string>
-    <string name="tv_bestRecord_from">de</string>
     <string name="Toast_NiveUM">Nivel 1 - Somas simples</string>
     <string name="Toast_DuasVidas">Tens duas vidas</string>
     <string name="Toast_UmaVida">Tens uma vida</string>

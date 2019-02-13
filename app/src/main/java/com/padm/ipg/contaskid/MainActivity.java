@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -14,14 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-
-
-    //** Declaração dos objetos para cada campo **//
+//** Declaração dos objetos para cada campo **//
 
     private EditText et_nome;
     private ImageView iv_personagem;
-    private TextView tv_bestscore;
+    private TextView tv_bestScore;
     private MediaPlayer mp;
 
 
@@ -34,11 +31,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //** Relação entre a parte lógica e gráfica **//
-
+//** Relação entre a parte lógica e gráfica **//
         et_nome = (EditText)findViewById(R.id.txt_nome);
         iv_personagem = (ImageView)findViewById(R.id.imageView_Personagem);
-        tv_bestscore = (TextView)findViewById(R.id.textView_BestScore);
+        tv_bestScore = (TextView)findViewById(R.id.textView_BestScore);
 
 
         //** Coloca icons na barra action bar **//
@@ -74,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
         //**Consulta base de dados e maior valor de score**/
 
         Cursor consulta = BD.rawQuery(
-        "select * from pontos where score = (select max (score)from pontos)", null);
+                "select * from pontos where score = (select max (score) from pontos)", null);
         if (consulta.moveToFirst()){
 
-            String temp_nome = consulta.getString(0 );
-            String temp_score = consulta.getString(1 );
-            tv_bestscore.setText(getString(R.string.tv_bestRecord) + temp_score + getString(R.string.tv_bestRecord_from) + temp_nome);
+            String temp_nome = consulta.getString(0);
+            String temp_score = consulta.getString(1);
+            tv_bestScore.setText("Record: " + temp_score + " de " + temp_nome);
             BD.close();
         } else {
             BD.close();
@@ -92,20 +88,20 @@ public class MainActivity extends AppCompatActivity {
         mp.setLooping(true);
     }
 
-    public void Jogar (View view){
+    public void Jogar(View view){
         String nome = et_nome.getText().toString();
 
         //** Libera recursos **//
-        if (!nome.equals("")){
+        if(!nome.equals("")){
             mp.stop();
             mp.release();
 
-         //** Implementa uma nova atividade **//
-             Intent intent = new Intent(this, Nivel1Activity.class);
+            //** Implementa uma nova atividade **//
+            Intent intent = new Intent(this, Nivel1Activity.class);
 
-             intent.putExtra("jogador", nome);
-             startActivity(intent);;
-             finish();
+            intent.putExtra("jogador", nome);
+            startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this, getString(R.string.toast_introduzNome), Toast.LENGTH_SHORT).show();
 
@@ -124,3 +120,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+

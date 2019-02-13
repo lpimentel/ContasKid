@@ -21,12 +21,10 @@ public class Nivel1Activity extends AppCompatActivity {
     private EditText et_resposta;
     private MediaPlayer mp, mp_great, mp_bad;
 
-
-
-    //**Declaração de variáveis e vetor de correspondência às operações**//
+//**Declaração de variáveis e vetor de correspondência às operações**//
 
     int score, numAleatorio_um, numAleatorio_dois, resultado, vidas = 3;
-    String nome_jogador, string_score, sting_vidas;
+    String nome_jogador, string_score, string_vidas;
 
     String numero [] = {"zero", "um", "dois", "tres", "quatro", "cinco", "seis", "sete", "oito","nove"};
 
@@ -52,7 +50,8 @@ public class Nivel1Activity extends AppCompatActivity {
         nome_jogador = getIntent().getStringExtra("jogador");
         tv_nome.setText("Jogador: " + nome_jogador);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         //** Colocalão dos sons **//
@@ -82,8 +81,8 @@ public class Nivel1Activity extends AppCompatActivity {
             if (resultado == resposta_jogador){
 
                 mp_great.start();
-                score ++;
-                tv_score.setText("Score:" + score);
+                score++;
+                tv_score.setText("Score: " + score);
                 et_resposta.setText("");
                 BaseDeDados();
 
@@ -123,17 +122,17 @@ public class Nivel1Activity extends AppCompatActivity {
             NumAleatorio();
 
 
-        }   else{
-                Toast.makeText(this, getString(R.string.Toast_IndicaResposta), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.Toast_IndicaResposta), Toast.LENGTH_SHORT).show();
 
         }
     }
 
     // **Método para criação de somas aleatórias cuja soma não seja maior que dez**//
 
-    public void NumAleatorio (){
+    public void NumAleatorio(){
 
-        if (score<=9){
+        if (score <= 9){
 
             numAleatorio_um = (int) (Math.random() * 10);
             numAleatorio_dois = (int) (Math.random() * 10);
@@ -148,7 +147,7 @@ public class Nivel1Activity extends AppCompatActivity {
                         iv_Aum.setImageResource(id);
 
                     }if (numAleatorio_dois == i){
-                         iv_Adois.setImageResource(id);
+                        iv_Adois.setImageResource(id);
                     }
 
                 }
@@ -158,30 +157,30 @@ public class Nivel1Activity extends AppCompatActivity {
 
             }
 
-         //** Passa para a próxima atividade**//
+            //** Passa para a próxima atividade**//
 
-        } else {
+        }else {
             Intent intent = new Intent(this, Nivel2Activity.class);
 
-        //** Envia o nome e o score para a próxima atividade**//
+            //** Envia o nome e o score para a próxima atividade**//
 
-         string_score = String.valueOf(score);
-         sting_vidas = String.valueOf(vidas);
-         intent.putExtra("jogador", nome_jogador);
-         intent.putExtra("score", string_score);
-         intent.putExtra("vidas", sting_vidas);
+            string_score = String.valueOf(score);
+            string_vidas = String.valueOf(vidas);
+            intent.putExtra("jogador", nome_jogador);
+            intent.putExtra("score", string_score);
+            intent.putExtra("vidas", string_vidas);
 
-         //** Inicia a próxima atividade**//
+            //** Inicia a próxima atividade**//
 
-         startActivity(intent);
-         finish();
-         mp.stop();
-         mp.release();
+            startActivity(intent);
+            finish();
+            mp.stop();
+            mp.release();
 
         }
 
     }
-//** Implementa o score do jogador com maior pontuação**//
+    //** Implementa o score do jogador com maior pontuação**//
     public void BaseDeDados (){
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"BD", null, 1);
         SQLiteDatabase BD = admin.getWritableDatabase();
@@ -191,13 +190,12 @@ public class Nivel1Activity extends AppCompatActivity {
             String temp_nome = consulta.getString(0 );
             String temp_score = consulta.getString(1);
 
-            int bestScore = Integer.parseInt((temp_score));
+            int bestScore = Integer.parseInt(temp_score);
 
             if (score > bestScore){
                 ContentValues modificacao = new ContentValues();
+                modificacao.put("nome", nome_jogador);
                 modificacao.put ("score", score);
-
-
                 BD.update("pontos", modificacao, "score=" + bestScore, null);
             }
 
@@ -215,10 +213,10 @@ public class Nivel1Activity extends AppCompatActivity {
         }
 
 
-        }
+    }
 
-        @Override
-        public void onBackPressed(){
+    @Override
+    public void onBackPressed(){
 
 
 
