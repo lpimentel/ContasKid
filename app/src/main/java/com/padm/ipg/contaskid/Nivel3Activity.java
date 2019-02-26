@@ -13,33 +13,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Nivel1Activity extends AppCompatActivity {
+public class Nivel3Activity extends AppCompatActivity {
 
-    //** Declaração dos objetos**//
+    //** Declaração dos objetos **//
 
     private TextView tv_nome, tv_score;
     private ImageView iv_Aum, iv_Adois, iv_vidas;
     private EditText et_resposta;
     private MediaPlayer mp, mp_great, mp_bad;
 
+
+
     //** Declaração de variáveis e vetor de correspondência às operações **//
 
     int score, numAleatorio_um, numAleatorio_dois, resultado, vidas = 3;
     String nome_jogador, string_score, string_vidas;
-
-    //** Array de strings - variável para guardar diversos valores//
 
     String numero [] = {"zero", "um", "dois", "tres", "quatro", "cinco", "seis", "sete", "oito","nove"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nivel1);
+        setContentView(R.layout.activity_nivel3);
 
 
-        Toast.makeText(this, getString(R.string.Toast_NiveUM), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.Toast_NiveTres), Toast.LENGTH_SHORT).show();
 
-        //** Cricão das relações entre a parte lógica e a parte gráfica **//
+        //** Cricão das relações entre a parte lógica e parfte gráfica **//
 
         tv_nome = (TextView)findViewById(R.id.textView_nome);
         tv_score = (TextView)findViewById(R.id.textView_score);
@@ -48,16 +48,34 @@ public class Nivel1Activity extends AppCompatActivity {
         iv_Adois = (ImageView)findViewById(R.id.imageView_NumDois);
         et_resposta = (EditText)findViewById(R.id.editText_resultado);
 
-        //** Obtenção do nome do jogar proveniente da primeira atividade **//
+        //** Obtenção do nome do jogar proveniente do segundo nível **//
 
         nome_jogador = getIntent().getStringExtra("jogador");
         tv_nome.setText("Jogador: " + nome_jogador);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        //** Recupera o score **//
+
+        string_score = getIntent().getStringExtra("score");
+        score = Integer.parseInt(string_score);
+        tv_score.setText("Score: " + score);
+
+        //** Recupera as vidas **//
+
+        string_vidas = getIntent().getStringExtra("vidas");
+        vidas = Integer.parseInt(string_vidas);
+        if(vidas == 3){
+            iv_vidas.setImageResource(R.drawable.tresvidas);
+        }if(vidas == 2){
+            iv_vidas.setImageResource(R.drawable.duasvidas);
+        }if(vidas == 1){
+            iv_vidas.setImageResource(R.drawable.umavida);
+        }
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
-        //** Colocalão dos sons **//
+        //** Colocação dos sons ** //
 
         mp = MediaPlayer.create(this, R.raw.goats);
         mp.start();
@@ -68,20 +86,20 @@ public class Nivel1Activity extends AppCompatActivity {
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
-        //** Indica a utilização do método aleatóruio do número **//
+        //** Indica utilização do método aleatório do número **//
 
         NumAleatorio();
 
     }
 
-    //** Configuração de validação de resposta **//
+    // ** Configuração de validação de resposta **//
 
     public void Comparar(View view){
         String resposta = et_resposta.getText().toString();
 
-        //** Configura a falta de resposta por parte do utilizador; som para acerto ou falha; número de vidasr **//
+        // ** Configura falta de resposta por parte do utilizado; som para acerto ou falha; número de vidasr **//
 
-        if (!resposta.equals("")){
+        if(!resposta.equals("")){
 
             int resposta_jogador = Integer.parseInt(resposta);
             if (resultado == resposta_jogador){
@@ -128,25 +146,26 @@ public class Nivel1Activity extends AppCompatActivity {
             NumAleatorio();
 
 
-        } else {
-            Toast.makeText(this, getString(R.string.Toast_IndicaResposta), Toast.LENGTH_SHORT).show();
+        }   else{
+            Toast.makeText(this, getString(R.string.else_IndicaResposta), Toast.LENGTH_SHORT).show();
 
         }
     }
 
-    //** Método para criação de somas aleatórias cuja soma não seja maior que dez **//
+    // ** Método para criação de somas subtrações cuja soma não seja maior que vinte **//
 
-    public void NumAleatorio(){
+    public void NumAleatorio (){
 
-        if (score <= 9){
+        if (score<=29){
 
             numAleatorio_um = (int) (Math.random() * 10);
             numAleatorio_dois = (int) (Math.random() * 10);
 
-            resultado = numAleatorio_um + numAleatorio_dois;
+            resultado = numAleatorio_um - numAleatorio_dois;
 
-            if (resultado <= 10){
+            // ** Condição para impedir números negativos **//
 
+            if (resultado>=0){
                 for (int i = 0; i  < numero.length; i++) {
                     int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
                     if (numAleatorio_um == i) {
@@ -155,20 +174,20 @@ public class Nivel1Activity extends AppCompatActivity {
                     }if (numAleatorio_dois == i){
                         iv_Adois.setImageResource(id);
                     }
-
                 }
 
             } else {
                 NumAleatorio();
-
             }
+
+
 
             //** Passa para a próxima atividade **//
 
-        }else {
-            Intent intent = new Intent(this, Nivel2Activity.class);
+        } else {
+            Intent intent = new Intent(this, Nivel4Activity.class);
 
-            //** Envia o nome e o score para a próxima atividade **//
+            //** Envia o nome e o score para a próxima atividade**//
 
             string_score = String.valueOf(score);
             string_vidas = String.valueOf(vidas);
@@ -197,12 +216,14 @@ public class Nivel1Activity extends AppCompatActivity {
             String temp_nome = consulta.getString(0 );
             String temp_score = consulta.getString(1);
 
-            int bestScore = Integer.parseInt(temp_score);
+            int bestScore = Integer.parseInt((temp_score));
 
             if (score > bestScore){
                 ContentValues modificacao = new ContentValues();
-                modificacao.put("nome", nome_jogador);
+                modificacao.put ("nome", nome_jogador);
                 modificacao.put ("score", score);
+
+
                 BD.update("pontos", modificacao, "score=" + bestScore, null);
             }
 
@@ -224,6 +245,7 @@ public class Nivel1Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+
 
 
     }

@@ -5,7 +5,7 @@
     android:id="@+id/bt_valida"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Nivel2Activity">
+    tools:context=".Nivel1Activity">
 
     <TextView
         android:id="@+id/textView_nome"
@@ -109,7 +109,6 @@
         android:id="@+id/editText_resultado"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:importantForAutofill="no"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -124,7 +123,9 @@
         android:layout_marginBottom="217dp"
         android:ems="10"
         android:hint="@string/et_resposta"
-        android:inputType="number" tools:targetApi="o"/>
+        android:importantForAutofill="no"
+        android:inputType="number"
+        tools:targetApi="o" />
 
     <Button
         android:id="@+id/button"
