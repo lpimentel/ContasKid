@@ -68,7 +68,7 @@ public class Nivel1Activity extends AppCompatActivity {
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
-        //** Indica a utilização do método aleatóruio do número **//
+        //** Indica a utilização do método aleatório do número **//
 
         NumAleatorio();
 
@@ -79,7 +79,7 @@ public class Nivel1Activity extends AppCompatActivity {
     public void Comparar(View view){
         String resposta = et_resposta.getText().toString();
 
-        //** Configura a falta de resposta por parte do utilizador; som para acerto ou falha; número de vidasr **//
+        //** Configura a falta de resposta por parte do utilizador; som para acerto ou falha; número de vidas **//
 
         if (!resposta.equals("")){
 
